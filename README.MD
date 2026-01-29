@@ -1,7 +1,6 @@
 # Order Price Calculator
 
-A flexible and extensible Java library for calculating the final price of an order, supporting various pricing rules such as discounts (fixed, percentage) and tax application.  
-Designed using OOP principles, it is easy to add and combine new pricing rules.
+A Java project built for learning and practice, focused on calculating the final price of an order using configurable pricing rules such as fixed discounts, percentage discounts, and tax application. The project applies OOP principles to demonstrate how pricing rules can be modeled, extended, and composed in a clean and maintainable way.
 
 ## Features
 
