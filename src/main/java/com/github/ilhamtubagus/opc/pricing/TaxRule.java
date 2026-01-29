@@ -2,17 +2,21 @@ package com.github.ilhamtubagus.opc.pricing;
 
 import com.github.ilhamtubagus.opc.domain.Money;
 import com.github.ilhamtubagus.opc.domain.Order;
-import jakarta.validation.constraints.Min;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.Objects;
 
 public class TaxRule implements PricingRule {
 
     private final BigDecimal taxRate;
     private final BigDecimal ONE_HUNDRED = new BigDecimal("100");
 
-    public TaxRule(@Min(0) BigDecimal taxRate) {
+    public TaxRule(BigDecimal taxRate) {
+        Objects.requireNonNull(taxRate);
+        if (taxRate.compareTo(BigDecimal.ZERO) < 0){
+            throw new IllegalArgumentException("Tax can't be negative");
+        }
         this.taxRate = taxRate;
     }
 

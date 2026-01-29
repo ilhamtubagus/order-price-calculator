@@ -2,12 +2,10 @@ package com.github.ilhamtubagus.opc.pricing;
 
 import com.github.ilhamtubagus.opc.domain.Money;
 import com.github.ilhamtubagus.opc.domain.Order;
-import com.github.ilhamtubagus.opc.domain.OrderItem;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.Objects;
 
 public class PercentageDiscountRule implements PricingRule {
 
@@ -15,10 +13,16 @@ public class PercentageDiscountRule implements PricingRule {
     private final BigDecimal ONE_HUNDRED = new BigDecimal("100");
 
     public PercentageDiscountRule(
-            @Min(1)
-            @Max(100)
             BigDecimal percentage
     ) {
+        Objects.requireNonNull(percentage);
+
+        if(percentage.compareTo(BigDecimal.ZERO) < 0){
+            throw new IllegalArgumentException("Discount can't be negative");
+        }
+        if(percentage.compareTo(BigDecimal.valueOf(100)) > 0){
+            throw new IllegalArgumentException("Discount maximum 100");
+        }
         this.percentage = percentage;
     }
 
